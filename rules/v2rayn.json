@@ -166,14 +166,5 @@
     ],
     "enabled": true,
     "locked": false
-  },
-  {
-    "remarks": "绕过 .cn 域名",
-    "domain": [
-      "domain:cn"
-    ],
-    "outboundTag": "direct",
-    "enabled": true,
-    "locked": false
   }
 ]

@@ -21,8 +21,7 @@
         "address": "https://dns.alidns.com/dns-query",
         "domains": [
           "geosite:cn",
-          "geosite:private",
-          "domain:cn"
+          "geosite:private"
         ],
         "skipFallback": true,
         "tag": "dns-domestic"
@@ -117,8 +116,7 @@
       {
         "domain": [
           "geosite:private",
-          "geosite:cn",
-          "domain:cn"
+          "geosite:cn"
         ],
         "outboundTag": "direct"
       },
