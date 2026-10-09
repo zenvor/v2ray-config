@@ -1,0 +1,95 @@
+[
+  {
+    "remarks": "阻断 UDP443",
+    "network": "udp",
+    "port": "443",
+    "outboundTag": "block",
+    "enabled": true
+  },
+  {
+    "remarks": "OpenAI / Anthropic 已知域名优先代理",
+    "domain": [
+      "domain:openai.com",
+      "domain:chatgpt.com",
+      "domain:oaistatic.com",
+      "domain:oaiusercontent.com",
+      "domain:oaistatsig.com",
+      "domain:anthropic.com",
+      "domain:claude.ai",
+      "domain:claude.com",
+      "domain:claude.app",
+      "domain:claudeusercontent.com",
+      "domain:claudemcpcontent.com",
+      "domain:ct.sendgrid.net",
+      "domain:intercom.io",
+      "domain:intercomcdn.com",
+      "domain:sentry.io",
+      "domain:statsigapi.net",
+      "full:cdn.openaimerge.com",
+      "full:cdn.workos.com",
+      "full:challenges.cloudflare.com",
+      "full:forwarder.workos.com",
+      "full:frontend-apps-multi-region.workos.com",
+      "full:humb.apple.com",
+      "full:images.workoscdn.com",
+      "full:js.stripe.com",
+      "full:rum.browser-intake-datadoghq.com",
+      "full:setup.workos.com",
+      "full:workos.imgix.net",
+      "full:register.appattest.apple.com",
+      "full:storage.googleapis.com",
+      "full:registry.npmjs.org",
+      "full:github.com",
+      "full:raw.githubusercontent.com",
+      "full:http-intake.logs.us5.datadoghq.com",
+      "full:browser-intake-us5-datadoghq.com",
+      "full:formulae.brew.sh",
+      "full:fonts.googleapis.com",
+      "full:fonts.gstatic.com",
+      "full:cdnjs.cloudflare.com",
+      "full:cdn.jsdelivr.net",
+      "full:cdn.tailwindcss.com",
+      "full:code.jquery.com",
+      "full:unpkg.com",
+      "domain:clau.de",
+      "domain:claudemcpclient.com",
+      "full:servd-anthropic-website.b-cdn.net",
+      "full:anthropic.com.cdn.cloudflare.net",
+      "full:anthropic.auth0.com",
+      "full:anthropic-com.ghost.io",
+      "full:cdn.usefathom.com",
+      "regexp:^.*-review\\.googlesource\\.com$",
+      "keyword:datadog",
+      "keyword:sift"
+    ],
+    "outboundTag": "proxy",
+    "enabled": true
+  },
+  {
+    "remarks": "家庭局域网通过代理访问（其他网络请按需关闭）",
+    "ip": [
+      "192.168.31.0/24"
+    ],
+    "outboundTag": "proxy",
+    "enabled": true
+  },
+  {
+    "remarks": "国内和私有域名直连",
+    "domain": [
+      "geosite:private",
+      "geosite:cn",
+      "domain:cn"
+    ],
+    "outboundTag": "direct",
+    "enabled": true
+  },
+  {
+    "remarks": "中国与私网 IP 直连",
+    "ip": [
+      "geoip:private",
+      "geoip:cn"
+    ],
+    "outboundTag": "direct",
+    "enabled": true
+  }
+]
