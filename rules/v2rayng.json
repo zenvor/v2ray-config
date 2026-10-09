@@ -1,10 +1,11 @@
 [
   {
-    "remarks": "阻断 UDP443",
-    "network": "udp",
-    "port": "443",
+    "remarks": "阻断udp443",
     "outboundTag": "block",
-    "enabled": true
+    "port": "443",
+    "network": "udp",
+    "enabled": true,
+    "locked": false
   },
   {
     "remarks": "OpenAI / Anthropic 已知域名优先代理",
@@ -83,6 +84,24 @@
     "enabled": true
   },
   {
+    "remarks": "绕过局域网IP",
+    "outboundTag": "direct",
+    "ip": [
+      "geoip:private"
+    ],
+    "enabled": true,
+    "locked": false
+  },
+  {
+    "remarks": "绕过局域网域名",
+    "outboundTag": "direct",
+    "domain": [
+      "geosite:private"
+    ],
+    "enabled": true,
+    "locked": false
+  },
+  {
     "remarks": "绕过中国公共DNSIP",
     "outboundTag": "direct",
     "ip": [
@@ -139,22 +158,30 @@
     "locked": false
   },
   {
-    "remarks": "国内和私有域名直连",
+    "remarks": "绕过中国IP",
+    "outboundTag": "direct",
+    "ip": [
+      "geoip:cn"
+    ],
+    "enabled": true,
+    "locked": false
+  },
+  {
+    "remarks": "绕过中国域名",
+    "outboundTag": "direct",
     "domain": [
-      "geosite:private",
-      "geosite:cn",
+      "geosite:cn"
+    ],
+    "enabled": true,
+    "locked": false
+  },
+  {
+    "remarks": "绕过 .cn 域名",
+    "domain": [
       "domain:cn"
     ],
     "outboundTag": "direct",
-    "enabled": true
-  },
-  {
-    "remarks": "中国与私网 IP 直连",
-    "ip": [
-      "geoip:private",
-      "geoip:cn"
-    ],
-    "outboundTag": "direct",
-    "enabled": true
+    "enabled": true,
+    "locked": false
   }
 ]
