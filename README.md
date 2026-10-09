@@ -4,9 +4,9 @@
 
 ## 策略
 
-UDP443 阻断 → 52 项已知 OpenAI/Anthropic 域名优先代理 → 家庭局域网 `192.168.31.0/24` 代理 → 国内/私有域名及 `.cn` 直连 → 中国/私网 IP 直连 → 未匹配默认代理。家庭规则来自用户现有配置，其他网络请关闭或修改。
+UDP443 阻断 → 52 项已知 OpenAI/Anthropic 域名优先代理 → Google 域名代理 → 家庭局域网 `192.168.31.0/24` 代理 → 中国公共 DNS IP/域名直连 → 国内/私有域名及 `.cn` 直连 → 中国/私网 IP 直连 → 未匹配默认代理。家庭规则来自用户现有配置，其他网络请关闭或修改。
 
-`geosite:cn`、`geosite:private`、`geoip:cn`、`geoip:private` 必须存在于客户端实际数据文件。这里提供可移植的基础规则，未包含 Mihomo 的广告集合、Apple/iCloud、游戏和 Google Play 特殊规则；导入前将自己需要的旧规则合并进去。域名清单保留社区 datadog/sift 关键词，其他应用访问共享主机也会被代理。
+`geosite:google`、`geosite:cn`、`geosite:private`、`geoip:cn`、`geoip:private` 必须存在于客户端实际数据文件。这里提供可移植的基础规则，未包含 Mihomo 的广告集合、Apple/iCloud、游戏和 Google Play 特殊规则；导入前将自己需要的旧规则合并进去。域名清单保留社区 datadog/sift 关键词，其他应用访问共享主机也会被代理。
 
 ## 导入
 
@@ -25,11 +25,14 @@ UDP443 阻断 → 52 项已知 OpenAI/Anthropic 域名优先代理 → 家庭局
 
 ## 维护与验证
 
-导入不是持续订阅；v2rayNG 2.2.6 该页面没有自定义规则 URL 导入。私有仓库下载需登录，不能作为匿名 raw 订阅。先人工下载/复制更新。只做 JSON、规则内容和顺序检查，未操作 VPN 或完成设备验收。
+导入不是持续订阅；v2rayNG 2.2.6 该页面没有自定义规则 URL 导入。仓库已公开，可匿名下载 raw 文件；客户端仍需人工下载/复制导入更新。只做 JSON、规则内容和顺序检查，未操作 VPN 或完成设备验收。
 
 前置域名覆盖根域与新增子域，不能自动覆盖新独立域名或只有 IP 的请求。未覆盖域名解析到 CN IP 仍会直连；本配置不是账号安全保证。
 
+Google 代理及中国公共 DNS IP/域名直连列表来自 v2rayNG 2.2.6 的内置白名单 `custom_routing_white`，保留完整列表。DNS IP 直连规则只决定访问这些服务器时的出站，不代表启用这些服务器解析其他域名；DNS 服务器仍由客户端设置决定。
+
 来源：
+- https://github.com/2dust/v2rayNG/blob/2.2.6/V2rayNG/app/src/main/assets/custom_routing_white
 - https://help.openai.com/zh-hans-cn/articles/9247338-network-recommendations-for-chatgpt-errors-on-web-and-apps
 - https://code.claude.com/docs/en/desktop#network-access-requirements
 - https://code.claude.com/docs/en/network-config#network-access-requirements
