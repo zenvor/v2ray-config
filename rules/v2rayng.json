@@ -76,14 +76,6 @@
     "locked": false
   },
   {
-    "remarks": "家庭局域网通过代理访问（其他网络请按需关闭）",
-    "ip": [
-      "192.168.31.0/24"
-    ],
-    "outboundTag": "proxy",
-    "enabled": true
-  },
-  {
     "remarks": "绕过局域网IP",
     "outboundTag": "direct",
     "ip": [
