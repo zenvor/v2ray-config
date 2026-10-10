@@ -1,6 +1,8 @@
 # v2ray-config
 
-专供 v2rayNG（Android）和 v2rayN（电脑）的 Xray 路由规则与 DNS 参考配置，独立于 Mihomo 仓库维护。不包含节点、订阅地址或凭据。
+适用于 v2rayNG（Android）和 v2rayN（电脑）的 Xray 路由规则与 DNS 参考配置。
+
+新手机配置请看：[v2rayNG 安卓配置教程](docs/v2rayng-android-setup.md)。
 
 ## 策略
 
@@ -17,19 +19,23 @@ UDP443 阻断 → AI 域名优先代理 → Google 域名代理 → 局域网 IP
 - v2rayNG：复制 `rules/v2rayng.json` 全文 → 路由设置 → 从剪贴板导入规则集。不是“导入预定义规则集”（那个入口选择软件内置模板）。先导出备份；导入可能替换未锁定旧规则，锁定规则可能合并后改变顺序，应逐条复核。
 - v2rayN：路由设置中新建独立规则集，使用从文件/剪贴板导入 `rules/v2rayn.json`，然后选择它。两文件当前内容一致，但分别保留发布路径；不同客户端版本的导入模型需实际验证。
 - 两端域名解析策略设置为 `IPIfNonMatch`。不要在末尾加覆盖所有端口/network 的通用代理规则，否则第一轮总能匹配，阻止未知域名进入解析后二次匹配。确认生成配置的第一个 outbound 是 `proxy`，未匹配连接才默认代理。
-- 规则导入只导入规则，不自动设置 DNS、解析策略、嗅探、VPN或节点。当前核对 v2rayNG 2.2.6 源码；尚未在设备导入验收。
+- 规则导入只导入规则，不自动设置 DNS、解析策略、嗅探、VPN或节点。
 
 ## DNS
 
-启用本地 DNS 功能（指客户端处理 DNS，不是系统 DNS）；默认远程 DNS 可设 `https://dns.google/dns-query,https://cloudflare-dns.com/dns-query`，国内 DNS 可设 `https://dns.alidns.com/dns-query,https://doh.pub/dns-query`。逗号旁不加空格，不用 Mihomo 的 `#PROXY`，不用绕路由直连的 `https+local://`。
+v2rayNG 推荐启用本地 DNS 和虚拟 DNS（FakeDNS），并设置：
 
-远程 DoH 要通过 proxy 出站，国内 DoH 通过 direct。v2rayNG 生成器有对应 DNS tag 路由，但用户前置规则可能抢先匹配，需检查导出配置/日志；v2rayN 的 DNS 设置单独核对，不假定规则导入后自动同效。
+- 远程 DNS：`https://cloudflare-dns.com/dns-query`
+- 境内 DNS：`https://dns.alidns.com/dns-query`
+- 域名策略：`IPIfNonMatch`
 
-`examples/xray-dns-routing.fragment.json` 是更明确的 DNS/tag 路由示例，**不是完整可运行配置**：需合并实际节点的完整配置，保留入站、DNS 捕获/出站、节点启动解析与原有特殊规则，核对 outbound tag 和第一个出站。示例需要 `geosite:geolocation-!cn` 数据；`UseIP` 含 IPv6，如需与当前 Mihomo IPv4 DNS 对齐可评估改用 `UseIPv4`。纯内网名称可能需要实际局域网 DNS，公共 DoH 不一定能解析。
+具体操作、规则导入和检查方法见[安卓配置教程](docs/v2rayng-android-setup.md)。v2rayN 的 DNS 设置需单独配置。
+
+`examples/xray-dns-routing.fragment.json` 为手动配置 Xray 的 DNS 与路由参考片段，需要与完整配置合并使用。
 
 ## 维护与验证
 
-导入不是持续订阅；v2rayNG 2.2.6 该页面没有自定义规则 URL 导入。仓库已公开，可匿名下载 raw 文件；客户端仍需人工下载/复制导入更新。只做 JSON、规则内容和顺序检查，未操作 VPN 或完成设备验收。
+导入不是持续订阅；v2rayNG 2.2.6 该页面没有自定义规则 URL 导入。仓库已公开，可匿名下载 raw 文件；客户端仍需人工下载/复制导入更新。
 
 前置域名覆盖根域与新增子域，不能自动覆盖新独立域名或只有 IP 的请求。未覆盖域名解析到 CN IP 仍会直连；本配置不是账号安全保证。
 
