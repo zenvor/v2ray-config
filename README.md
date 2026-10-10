@@ -31,8 +31,6 @@ v2rayNG 推荐启用本地 DNS 和虚拟 DNS（FakeDNS），并设置：
 
 具体操作、规则导入和检查方法见[安卓配置教程](docs/v2rayng-android-setup.md)。v2rayN 的 DNS 设置需单独配置。
 
-`examples/xray-dns-routing.fragment.json` 为手动配置 Xray 的 DNS 与路由参考片段，需要与完整配置合并使用。
-
 ## 维护与验证
 
 导入不是持续订阅；v2rayNG 2.2.6 该页面没有自定义规则 URL 导入。仓库已公开，可匿名下载 raw 文件；客户端仍需人工下载/复制导入更新。
